@@ -1,0 +1,146 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    margin: 0;
+}
+
+.format {
+    width: 422px;
+    height: 335px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.size {
+    width: 208px;
+    height: 331px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.front {
+    margin-bottom: 3px;
+}
+
+.front img {
+    width: 100%;
+    height: 100%;
+}
+
+.front .barcode {
+    position: absolute;
+    width: 100px;
+    height: 15px;
+    top: 18%;
+    left: 5%;
+}
+
+.front span {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    top: 18%;
+    right: 0;
+}
+
+.front div {
+    position: absolute;
+    top: 65%;
+    left: 3%;
+}
+
+.front .vimg {
+    position: absolute;
+    top: 24.5%;
+    left: 28.5%;
+    width: 95px;
+    height: 125px;
+}
+
+.front div p {
+    font-size: 9px;
+    letter-spacing: 0px;
+    margin: 8px 0px;
+    font-weight: 600;
+}
+
+.back img {
+    width: 100%;
+    height: 100%;
+}
+
+.back .back-epic {
+    position: absolute;
+    top: 3%;
+    right: 10%;
+    font-size: 10px;
+    letter-spacing: 0px;
+    font-weight: 600;
+}
+
+.back .add {
+    position: absolute;
+    top: 2.5%;
+    left: 4%;
+}
+
+.back .add p {
+    font-size: 8px;
+    letter-spacing: 0px;
+    margin: 0;
+    font-weight: normal;
+}
+
+.back .address {
+    display: flex;
+}
+
+.back .date {
+    position: absolute;
+    font-size: 8px;
+    font-weight: normal;
+    top: 30%;
+    left: 4%;
+}
+
+.back .sign {
+    position: absolute;
+    top: 25.5%;
+    right: 2%;
+}
+
+.back .sign p {
+    font-size: 6px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+.back .sign img {
+    width: 100px;
+    height: 20px;
+}
+
+.back .assembly {
+    position: absolute;
+    top: 39.5%;
+    left: 4%;
+}
+
+.back .part {
+    position: absolute;
+    top: 53%;
+    left: 4%;
+    letter-spacing: 0px;
+}
+
+.back .assembly p,
+.back .part p {
+    font-size: 8px;
+    margin: 0px;
+    font-weight: 400;
+}
