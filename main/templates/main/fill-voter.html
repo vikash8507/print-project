@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<!-- <div class="col-sm-6 offset-sm-3">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="mt-1 btn btn-outline-success btn-block" value="Update">
+    </form>
+</div> -->
+<h3 class="text-center">Update Voter Details</h3>
+<form method="POST" , enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="ename">English Name</label>
+            <input type="text" class="form-control" value="{{ voter.name1 }}" id="ename" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="hname">Hindi Name</label>
+            <input type="text" class="form-control" value="{{ voter.name2 }}" id="hname" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="gname1">English Guardian Name</label>
+            <input type="text" class="form-control" value="{{ voter.gname1 }}" id="ganme1" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gname2">Hindi Guardian Name</label>
+            <input type="text" class="form-control" value="{{ voter.gname2 }}" id="gname2" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="gname1">English Address</label>
+            <input type="text" class="form-control" name='add1' id="ganme1" value="{{ voter.address1 }}" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gname2">Hindi Address</label>
+            <input type="text" class="form-control" name='add2' id="gname2" value="{{ voter.address2 }}" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="photo">Photo</label>
+            <input type="file" class="form-control-file" name='photo' id="photo" onchange="loadFile(event)" {% if not voter.photo.url %} required {% endif %}>
+            <label for="birth">Date Of Birth</label>
+            <input type="date" class="form-control" name='birth' value="{{ voter.birth }}" id="birth" {% if not voterbirth %} required {% endif %}>
+        </div>
+        <div class="form-group col-md-6">
+            <img id="output" width="150" height="150" />
+            {% if voter.photo.url %}
+            <img src="{{ voter.photo.url }}" alt="{{voter.name1}}" width="150" height="150" />
+            {% endif %}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Voter</button>
+</form>
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
+
+{% endblock %}

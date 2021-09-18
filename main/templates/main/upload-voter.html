@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="col-sm-6 offset-sm-3 mt-2">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="voter">Upload Voter File</label>
+            <input type="file" class="form-control" name='voter'>
+        </div>
+        <input type="submit" class="mt-1 btn btn-success btn-block" value="Create Voter Card">
+        <a href="{% url 'voters-list' %}" class="btn btn-info btn-block mt-1">Go to Voter Card List <i
+                class="fa fa-hand-point-right"></i></a>
+    </form>
+</div>
+{% endblock %}
