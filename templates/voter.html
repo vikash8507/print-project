@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/voter.css' %}">
+{% endblock %}
+{% block body %}
+<h2 class="text-center">{{ voter.name1 }}</h2>
+<div class="format" id="content">
+    <div class="size front">
+        <img src="{% static 'images/voter1.jpg' %}" alt="">
+        <img src="{{voter.barcode.url}}" alt="" class='barcode'>
+        <span id='pdfname'>{{voter.epic}}</span>
+        <img src="{{voter.photo.url}}" alt="" class="vimg">
+        <div>
+            <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;:
+                {{voter.name2}}</p>
+            <p>Name &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;: {{voter.name1}}
+            </p>
+            <p>
+                {% if voter.guardian == "Father's Name" %}
+                पिता का नाम
+                {% else %}
+                पति का नाम
+                {% endif %}
+             &nbsp;&nbsp;: {{voter.gname2}}</p>
+            <p>
+                {% if voter.guardian == "Father's Name" %}
+                Father's Name
+                {% else %}
+                Husband's Name
+                {% endif %}: {{voter.gname1|title}}</p>
+        </div>
+    </div>
+    <div class="size back">
+        <img src="{% static 'images/voter2.jpg' %}" alt="">
+        <p class="back-epic">{{voter.epic}}</p>
+        <div class="add">
+            <p><strong>लिंग/Sex</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;:{% if voter.gender == 'M' %} पुरुष/Male {% else %} महिला/Female {% endif %}
+            </p>
+            <p><strong>जन्म तिथि</strong></p>
+            <p><strong>Date Of Birth</strong> &nbsp;&nbsp;:{{voter.birth|date:"Y-m-d"}}</p>
+            <div class="address">
+                <p style="margin-right: 5px;"><strong>पता:</strong></p>
+                <p>{{voter.address2}}</p>
+            </div>
+            <div class="address">
+                <p style="margin-right: 5px;"><strong>Address:</strong></p>
+                <p>{{voter.address1}}</p>
+            </div>
+        </div>
+        <p class="date"><strong>Date: {{date}}</strong></p>
+        <div class="sign">
+            <img src="{% static 'images/k.jpg' %}" alt="">
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;<strong>निर्वाचक पंजीकरण अधिकारी</strong></p>
+            <p><b>Electrol Registration Officer</b></p>
+        </div>
+        <div class="assembly">
+            <p><strong>विधानसभा निर्वाचन क्षेत्र संख्या और नाम:</strong> <br />{{voter.block}}</p>
+            <p><strong>Assembly Consatituency No. & Name:</strong> <br />{{voter.block}}</p>
+        </div>
+        <div class="part">
+            <p><strong>भाग संख्या और नाम:</strong>&nbsp;&nbsp; {{voter.partno}} - {{voter.partname}}</p>
+            <p><strong>Part No. & Name:</strong>&nbsp;&nbsp; {{voter.partno}} - {{voter.partname}}</p>
+        </div>
+    </div>
+</div>
+<center>
+    <button onclick="CreatePDFfromHTML();" class='btn btn-success mt-1'><i class="fa fa-download"></i> Save as
+        PDF</button>
+    <a href="{% url 'voters-list' %}" class="btn btn-info mt-1"><i class="fa fa-hand-point-left"></i> Voters List</a>
+</center>
+
+<script>
+    function CreatePDFfromHTML() {
+        var printContents = document.getElementById('content').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+{% endblock %}
