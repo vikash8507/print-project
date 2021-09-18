@@ -3,7 +3,6 @@ asgiref==3.4.1
 autopep8==1.5.7
 beautifulsoup4==4.10.0
 bs4==0.0.1
-cffi==1.14.6
 code128==0.2b2
 cryptography==3.4.8
 dj-database-url==0.5.0
