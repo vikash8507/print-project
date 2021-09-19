@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="col-sm-6 offset-sm-3 mt-2">
+    <h2>
+        Download EPIC File?
+        <a href="https://electoralsearch.in/" target="_blank" class="btn btn-info">Click Here</a>
+    </h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <label for="voter">Upload Voter File</label>
+            <label for="voter">Upload EPIC File</label>
             <input type="file" class="form-control" name='voter'>
         </div>
         <input type="submit" class="mt-1 btn btn-success btn-block" value="Create Voter Card">
