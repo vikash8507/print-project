@@ -9,8 +9,10 @@
     <div class="size front">
         <img src="{% static 'images/voter1.jpg' %}" alt="">
         <img src="{{voter.barcode.url}}" alt="" class='barcode'>
+        {{voter.barcode.url}}
         <span id='pdfname'>{{voter.epic}}</span>
         <img src="{{voter.photo.url}}" alt="" class="vimg">
+        {{voter.photo.url}}
         <div>
             <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;:
