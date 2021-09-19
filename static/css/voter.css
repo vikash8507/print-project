@@ -32,6 +32,8 @@ p {
     height: 100%;
     filter: contrast(115%);
     filter: brightness(115%);
+    filter: grayscale(30%);
+    filter: saturate(100%);
 }
 
 .front .barcode {
