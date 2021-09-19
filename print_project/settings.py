@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nol*dkbr%1u-_nq#1=%p2$wx9%(e%x*q5wc9=v5$nxk%!!$(gb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["https://voterprint.herokuapp.com/", "127.0.0.1:8000/"]
 
