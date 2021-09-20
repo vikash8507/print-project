@@ -12,24 +12,28 @@
         <span id='pdfname'>{{voter.epic}}</span>
         <img src="{{voter.photo.url}}" alt="" class="vimg">
         <div>
-            <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;:
+            <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp; :
                 {{voter.name2}}</p>
-            <p>Name &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;: {{voter.name1}}
+            <p>Name &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; : {{voter.name1}}
             </p>
             <p>
-                {% if voter.guardian == "Father's Name" %}
+                {% if voter.guardian_title == "Father's Name" %}
                 पिता का नाम
                 {% else %}
                 पति का नाम
                 {% endif %}
-             &nbsp;&nbsp;: {{voter.gname2}}</p>
-            <p>
-                {% if voter.guardian == "Father's Name" %}
-                Father's Name
-                {% else %}
-                Husband's Name
-                {% endif %}: {{voter.gname1|title}}</p>
+                 &nbsp;&nbsp;&nbsp; : {{voter.gname2}}
+            </p>
+        </div>
+        <div class="fname">
+            <p class="title">
+            {% if voter.guardian_title == "Father's Name" %}
+            Father's <br />Name
+            {% else %}
+            Husband's Name{% endif %}
+            </p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p class="name"> : {{voter.gname1|title}}</p>
         </div>
     </div>
     <div class="size back">
