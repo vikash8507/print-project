@@ -56,18 +56,19 @@ def upload_voter(request):
         path = settings.BASE_DIR / "media/barcodes/"
         code128.image(epic).save(os.path.join(
             path, f"{epic}.png"))
-
+        sp = block.split(" ")
+        spblock = f'{sp[2]} {sp[1]} {sp[0]}'
         voter_data = Voter(
             epic=epic,
             name1=name1,
             name2=name2,
             state=state,
-            block=block,
+            blck1=spblock,
             subblock=subblock,
             gender=gender,
             gname1=gname1,
             gname2=gname2,
-            partname=partname,
+            partname1=partname,
             partno=partno,
             serialno=serialno,
             barcode=f"barcodes/{epic}.png",
@@ -86,6 +87,10 @@ def fill_voter(request, id):
         add1 = request.POST.get("add1", voter.address1)
         add2 = request.POST.get("add2", voter.address2)
         birth = request.POST.get("birth", voter.birth)
+        blck1 = request.POST.get("blck1", voter.blck1)
+        blck2 = request.POST.get("blck2", voter.blck2)
+        partname1 = request.POST.get("partname1", voter.partname1)
+        partname2 = request.POST.get("partname2", voter.partname2)
         photo = request.FILES.get("photo", voter.photo)
         if add1 == 'None' or add2 == 'None' or photo == '' or birth == '':
             messages.warning(
@@ -95,10 +100,17 @@ def fill_voter(request, id):
             voter.address2 = add2
             voter.photo = photo
             voter.birth = birth
+            voter.blck1 = blck1
+            voter.blck2 = blck2
+            voter.partname2 = partname2
+            voter.partname2 = partname2
             voter.save()
             messages.success(request, "Voter updated")
             return redirect("voters-list")
-    return render(request, 'main/fill-voter.html', {'voter': voter})
+    context = {
+        "voter": voter,
+    }
+    return render(request, 'main/fill-voter.html', context)
 
 @login_required
 def delete_voter(request, id):
