@@ -43,6 +43,26 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
+            <label for="gname1">English Block</label>
+            <input type="text" class="form-control" name='blck1' id="ganme1" value="{{ voter.blck1 }}" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gname2">Hindi Block</label>
+            <input type="text" class="form-control" name='blck2' id="gname2" value="{{ voter.blck2 }}" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="gname1">English Partname</label>
+            <input type="text" class="form-control" name='partname1' id="ganme1" value="{{ voter.partname1 }}" required readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gname2">Hindi Partname</label>
+            <input type="text" class="form-control" name='partname2' id="gname2" value="{{ voter.partname2 }}" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
             <label for="photo">Photo</label>
             <input type="file" class="form-control-file" name='photo' id="photo" onchange="loadFile(event)" {% if not voter.photo.url %} required {% endif %}>
             <label for="birth">Date Of Birth</label>
@@ -56,6 +76,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Update Voter</button>
+    <a href="{% url 'voters-list' %}" class="btn btn-info">Voters List</a>
 </form>
 
 <script>
