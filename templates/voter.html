@@ -8,9 +8,9 @@
 <div class="format" id="content">
     <div class="size front">
         <img src="{% static 'images/voter1.jpg' %}" alt="">
-        <img src="{{voter.barcode.url}}" alt="" class='barcode'>
+        <img src="{{voter.barcode.url}}" alt="" class='barcode' style="border-radius: 0px;">
         <span id='pdfname'>{{voter.epic}}</span>
-        <img src="{{voter.photo.url}}" alt="" class="vimg">
+        <img src="{{voter.photo.url}}" alt="" class="vimg" style="border-radius: 0px;">
         <div>
             <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; :
@@ -19,9 +19,9 @@
             </p>
             <p>
                 {% if voter.guardian_title == "Father's Name" %}
-                पिता का नाम
+                पिता का नाम 
                 {% else %}
-                पति का नाम
+                पति का नाम 
                 {% endif %}
                  &nbsp;&nbsp;&nbsp; : {{voter.gname2}}
             </p>
@@ -33,7 +33,7 @@
             {% else %}
             Husband's Name{% endif %}
             </p>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p class="name"> : {{voter.gname1|title}}</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p class="name" style="margin-left: -1px;"> : {{voter.gname1|title}}</p>
         </div>
     </div>
     <div class="size back">
@@ -61,12 +61,12 @@
             <p><b>Electrol Registration Officer</b></p>
         </div>
         <div class="assembly">
-            <p><strong>विधानसभा निर्वाचन क्षेत्र संख्या और नाम:</strong> <br />{{voter.blck2}}</p>
-            <p><strong>Assembly Consatituency No. & Name:</strong> <br />{{voter.blck1}}</p>
+            <p><strong>विधानसभा निर्वाचन क्षेत्र संख्या और नाम: {{voter.blck2}}</strong></p>
+            <p><strong>Assembly Consatituency No. & Name: {{voter.blck1}}</strong></p>
         </div>
         <div class="part">
-            <p><strong>भाग संख्या और नाम:</strong>&nbsp;&nbsp; {{voter.partno}} - {{voter.partname2}}</p>
-            <p><strong>Part No. & Name:</strong>&nbsp;&nbsp; {{voter.partno}} - {{voter.partname1}}</p>
+            <p><strong>भाग संख्या और नाम:&nbsp;&nbsp; {{voter.partno}} - {{voter.partname2}}</strong></p>
+            <p><strong>Part No. & Name:&nbsp;&nbsp; {{voter.partno}} - {{voter.partname1}}</strong></p>
         </div>
     </div>
 </div>
