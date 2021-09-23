@@ -17,7 +17,7 @@
                 {{voter.name2}}</p>
             <p>Name &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; : {{voter.name1}}
             </p>
-            <p>
+            <p {% if voter.guardian_title == "Father's Name" %} style="margin-left: -1px;" {% endif %}>
                 {% if voter.guardian_title == "Father's Name" %}
                 पिता का नाम 
                 {% else %}
@@ -28,7 +28,7 @@
         </div>
         <div class="fname">
             {% if voter.guardian_title == "Father's Name" %}
-            <p class="title" style="margin-right: 10px;">
+            <p class="title" style="margin-right: 11px;">
             Father's <br />Name&nbsp;
             </p>
             {% else %}
