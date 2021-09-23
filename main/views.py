@@ -6,11 +6,12 @@ from django.contrib.auth.decorators import login_required
 import os
 from django.conf import settings
 from lxml import etree
+from englisttohindi.englisttohindi import EngtoHindi
 
 import code128
 from datetime import date
 from main.models import Voter
-from main.forms import VoterForm
+# from main.forms import VoterForm
 
 @login_required
 def upload_voter(request):
@@ -58,17 +59,22 @@ def upload_voter(request):
             path, f"{epic}.png"))
         sp = block.split(" ")
         spblock = f'{sp[2]} {sp[1]} {sp[0]}'
+        blck2 = f"{sp[2]} {sp[1]} {EngtoHindi(sp[0]).convert}"
+        partname2 = EngtoHindi(partname).convert
+        print(partname2)
         voter_data = Voter(
             epic=epic,
             name1=name1,
             name2=name2,
             state=state,
             blck1=spblock,
+            blck2=blck2,
             subblock=subblock,
             gender=gender,
             gname1=gname1,
             gname2=gname2,
             partname1=partname,
+            partname2=partname2,
             partno=partno,
             serialno=serialno,
             barcode=f"barcodes/{epic}.png",
@@ -87,12 +93,11 @@ def fill_voter(request, id):
         add1 = request.POST.get("add1", voter.address1)
         add2 = request.POST.get("add2", voter.address2)
         birth = request.POST.get("birth", voter.birth)
-        blck1 = request.POST.get("blck1", voter.blck1)
         blck2 = request.POST.get("blck2", voter.blck2)
-        partname1 = request.POST.get("partname1", voter.partname1)
         partname2 = request.POST.get("partname2", voter.partname2)
         photo = request.FILES.get("photo", voter.photo)
-        if add1 == 'None' or add2 == 'None' or photo == '' or birth == '':
+        
+        if add1 == 'None' or add1 == '' or photo == '' or birth == '':
             messages.warning(
                 request, "Please update address1, address2, date of birth and photo")
         else:
@@ -100,16 +105,17 @@ def fill_voter(request, id):
             voter.address2 = add2
             voter.photo = photo
             voter.birth = birth
-            voter.blck1 = blck1
             voter.blck2 = blck2
             voter.partname2 = partname2
             voter.partname2 = partname2
             voter.save()
-            messages.success(request, "Voter updated")
-            return redirect("voters-list")
+            messages.success(request, "Voter updated. Please check and return to voters list")
     context = {
-        "voter": voter,
+        "voter": voter
     }
+    if voter.address2 == "None" or voter.address2 == "":
+        res = EngtoHindi(voter.address1).convert
+        context['address2'] = res
     return render(request, 'main/fill-voter.html', context)
 
 @login_required
