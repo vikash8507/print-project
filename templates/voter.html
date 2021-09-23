@@ -27,10 +27,12 @@
             </p>
         </div>
         <div class="fname">
-            <p class="title">
             {% if voter.guardian_title == "Father's Name" %}
+            <p class="title" style="margin-right: 10px;">
             Father's <br />Name&nbsp;
+            </p>
             {% else %}
+            <p class="title">
             Husband's <br />Name{% endif %}
             </p>
             &nbsp;&nbsp;&nbsp;<p class="name" style="margin-left: -1px;"> : {{voter.gname1|title}}</p>
