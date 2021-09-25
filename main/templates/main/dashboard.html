@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+{% block body %}
+
+<h3 class="text-center mb-2">Buy Credits</h3>
+
+<div class="col-sm-6 offset-sm-4 mb-2">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <select class="form-control">
+                <option value="10">10 Points 50 Rs.</option>
+                <option value="20">20 Points 95 Rs.</option>
+                <option value="30">30 Points 140 Rs.</option>
+                <option value="40">40 Points 185 Rs.</option>
+                <option value="50">50 Points 230 Rs.</option>
+                <option value="60">60 Points 275 Rs.</option>
+                <option value="70">70 Points 320 Rs.</option>
+                <option value="80">80 Points 370 Rs.</option>
+                <option value="90">90 Points 415 Rs.</option>
+                <option value="100">100 Points 460 Rs.</option>
+            </select>
+          </div>
+          <div class="col">
+            <input type="submit" class="btn btn-info" value="Add Credit">
+          </div>
+        </div>
+      </form>
+</div>
+
+<div class="row">
+    <div class="card-height card-1 mb-2 col-sm-4 offset-sm-4">
+        <p>Total Print Credits <br /><span>5</span> </p> 
+    </div>
+</div>
+<div class="row">
+    <div class="card-height card-2 mb-2 col-sm-3 offset-sm-1">
+        <p>Total Voter Prints <br /><span>5</span> </p> 
+    </div>
+    <div class="card-height card-3 mb-2 col-sm-3 offset-sm-1">
+        <p>Total Aadhaar Prints <br /><span>5</span> </p> 
+    </div>
+    <div class="card-height card-4 mb-2 col-sm-3 offset-sm-1">
+        <p>Total Pan Prints <br /><span>5</span> </p> 
+    </div>
+</div>
+
+{% endblock %}

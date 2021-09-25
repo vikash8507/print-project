@@ -14,6 +14,10 @@ from main.models import Voter
 # from main.forms import VoterForm
 
 @login_required
+def dashboard(request):
+    return render(request, 'main/dashboard.html')
+
+@login_required
 def upload_voter(request):
     if request.method == 'POST':
         data = request.FILES.get('voter', None)
