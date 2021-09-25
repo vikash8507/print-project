@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from bs4 import BeautifulSoup
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
+import razorpay
 import os
 from django.conf import settings
 from lxml import etree
@@ -11,11 +13,32 @@ from englisttohindi.englisttohindi import EngtoHindi
 import code128
 from datetime import date
 from main.models import Voter
-# from main.forms import VoterForm
 
 @login_required
 def dashboard(request):
+    if request.method == 'POST':
+        points = int(request.POST.get('points'))
+        amount = points*5*100
+
+        key = "rzp_test_KBBlsYrXB8PJkJ"
+        secret = "R9DBF9jFtjS1LcA7zNphaaah"
+
+        client = razorpay.Client(auth=(key, secret))
+        order_currency = 'INR'
+
+        payment = client.order.create(data={"amount": amount, "currency": order_currency})
+        return render(request, 'main/dashboard.html', {'payment': payment, "key": key})
     return render(request, 'main/dashboard.html')
+
+@login_required
+@csrf_exempt
+def success(request):
+    response = request.POST
+    context = {
+        "payment": response,
+        "user": request.user,
+    }
+    return render(request, 'main/success.html', context)
 
 @login_required
 def upload_voter(request):

@@ -1,9 +1,10 @@
 from django.urls import path
 
-from main.views import dashboard, upload_voter, fill_voter, generate_pdf, voters_list, delete_voter
+from main.views import dashboard, success, upload_voter, fill_voter, generate_pdf, voters_list, delete_voter
 
 urlpatterns = [
     path("", dashboard, name="dashboard"),
+    path("success/", success, name="success"),
     path("upload-voter/", upload_voter, name="upload-voter"),
     path('voters-list', voters_list, name='voters-list'),
     path("fill-voter/<int:id>", fill_voter, name="fill-voter"),
