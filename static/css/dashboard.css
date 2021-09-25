@@ -1,9 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,300&display=swap');
+
 .card-height {
     height: 150px;
     padding: 5px;
     text-align: center;
     margin: auto;
     background-position: center center;
+    box-shadow: 0 0 2px 2px #ccc;
+}
+
+.gradient-border {
+  --borderWidth: 5px;
+  background: #1D1F20;
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+
+.gradient-border:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 2s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes animatedgradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .card-1 {
@@ -32,16 +68,16 @@
 
 p {
     margin-top: 8%;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #fff;
     font-weight: bold;
-    opacity: 1;
     letter-spacing: 1px;
     animation: colorRotate 5s linear 0s infinite;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 p span {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 
 @keyframes colorRotate {
@@ -49,18 +85,18 @@ p span {
       color: #ffffff;
     }
     20% {
-      color: #043758;
+      color: #b1d2e7;
     }
     40% {
-      color: #06cf06;
+      color: #bae2ba;
     }
     60% {
-      color: #c91971;
+      color: #ece2e7;
     }
     80% {
-      color: #1c1ccf;
+      color: #c6c6eb;
     }
     100% {
-        color: #33337c;
+        color: #bbbbee;
     }
   }
