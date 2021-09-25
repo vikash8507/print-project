@@ -11,7 +11,7 @@
         <img src="{{voter.barcode.url}}" alt="" class='barcode' style="border-radius: 0px;">
         <span id='pdfname'>{{voter.epic}}</span>
         <img src="{{voter.photo.url}}" alt="" class="vimg" style="border-radius: 0px;">
-        <div>
+        <div style="margin-left: 5px;">
             <p>नाम &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; :
                 {{voter.name2}}</p>
@@ -26,7 +26,7 @@
                  &nbsp;&nbsp;&nbsp;&nbsp; : {{voter.gname2}}
             </p>
         </div>
-        <div class="fname">
+        <div class="fname" style="margin-left: 5px;">
             {% if voter.guardian_title == "Father's Name" %}
             <p class="title" style="margin-right: 11px;">
             Father's <br />Name&nbsp;
@@ -48,11 +48,11 @@
             <p><strong>जन्म तिथि</strong></p>
             <p><strong>Date Of Birth</strong> &nbsp;&nbsp;:{{voter.birth|date:"Y-m-d"}}</p>
             <div class="address">
-                <p style="margin-right: 5px;"><strong>पता:</strong></p>
+                <p style="margin-right: 10px;"><strong>पता:</strong></p>
                 <p>{{voter.address2}}</p>
             </div>
             <div class="address">
-                <p style="margin-right: 5px;"><strong>Address:</strong></p>
+                <p style="margin-right: 10px;"><strong>Address:</strong></p>
                 <p>{{voter.address1}}</p>
             </div>
         </div>
