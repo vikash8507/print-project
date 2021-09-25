@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load qr_code %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/pan.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="pan-front">
+        <img src="{% static 'images/pan.webp' %}" alt="">
+        <div class="color-change1"></div>
+        <div class="color-change2"></div>
+        <div class="color-change3"></div>
+        <div class="color-change4"></div>
+        <p class="pan">EKPIK9731C</p>
+        <p class="name">VIKASH KUMAR</p>
+        <p class="fname">GAIRUN SINGH</p>
+        <p class="birth">04/05/1998</p>
+        <img src="{% static 'images/vikash.jpg' %}" alt="" class="image">
+        <img src="{% static 'images/sign.png' %}" alt="" class="sign">
+        <div class="qrcode" style="background-color: white;"></div>
+        <img src="{% qr_url_from_text "EKPIK9731C / VIKASH KUMAR / GAIRUN SINGH / 04/05/1998" size=8 version=20 error_correction="Q" cache_enabled=False %}" alt="Hello World!" class="qrcode">        
+    </div>
+
+{% endblock %}

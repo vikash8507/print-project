@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2 class="text-center">Pan Card List</h2>
+<a href="{% url 'new-pan' %}" class="btn btn-success mb-1"><i class="fa fa-plus-circle"></i> Generate New
+    Pan Card</a>
+<table class="table text-center table-striped table-bordered table-hover table-dark">
+    <thead class="bg-primary">
+        <tr>
+            <th scope="col">PAN NO.</th>
+            <th scope="col">NAME</th>
+            <th scope="col">ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pan in pans %}
+        <tr>
+            <td>{{pan.pno}}</td>
+            <td>{{pan.name}}</td>
+            <td>
+                <a class="btn btn-info btn-sm" href=""><i class="fa fa-edit"></i></a>
+                <a class="btn btn-success btn-sm" href=""><i class="fa fa-eye"></i></a>
+                <a class="btn btn-danger btn-sm" href=""><i
+                        class="fa fa-trash-alt"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</table>
+{% endblock %}

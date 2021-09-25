@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<h3 class="text-center">Fill PAN Details</h3>
+<form method="POST" , enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="type">Type of PAN Card</label>
+            <select class="custom-select" name='ptype'>
+                <option value="major">Major</option>
+                <option value="minor">Minor</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="pan">PAN NO.</label>
+            <input type="text" class="form-control" id="ganme1" name='pan' required placeholder="PAN number">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" name='name' required placeholder="PAN holder full name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="fname">Father's Name</label>
+            <input type="text" class="form-control" id="fname" name='fname' required placeholder="PAN holder father's name'">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="birth">Date Of Birth</label>
+            <input type="date" class="form-control" name='birth' id="birth" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="photo">Photo</label>
+            <input type="file" class="form-control-file" name='photo' id="photo" required>
+            <label for="sign">Signature</label>
+            <input type="file" class="form-control-file" name='sign' id="sign" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save PAN Details</button>
+    <a href="{% url 'pan-list' %}" class="btn btn-info"><i class="fa fa-hand-point-left"></i> Go to PanCard List</a>
+</form>
+
+{% endblock %}

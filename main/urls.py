@@ -1,6 +1,6 @@
 from django.urls import path
 
-from main.views import dashboard, success, upload_voter, fill_voter, generate_pdf, voters_list, delete_voter
+from main.views import dashboard, success, upload_voter, fill_voter, generate_pdf, voters_list, delete_voter, pan_list, pan_pdf, new_pan
 
 urlpatterns = [
     path("", dashboard, name="dashboard"),
@@ -10,4 +10,8 @@ urlpatterns = [
     path("fill-voter/<int:id>", fill_voter, name="fill-voter"),
     path("delete-voter/<int:id>", delete_voter, name="delete-voter"),
     path("pdf/<int:id>", generate_pdf, name="pdf"),
+
+    path("pan-list/", pan_list, name="pan-list"),
+    path("new-pan/", new_pan, name="new-pan"),
+    # path("pan-pdf/<int:pk>", pan_pdf, name="pan-pdf"),
 ]

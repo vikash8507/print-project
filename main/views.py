@@ -168,3 +168,16 @@ def generate_pdf(request, id):
         "date": date.today().strftime("%d/%m/%Y")
     }
     return render(request, "voter.html", context)
+
+
+@login_required
+def pan_list(request):
+    return render(request, "main/pan-list.html")
+
+@login_required
+def new_pan(request):
+    return render(request, "main/new-pan.html")
+
+@login_required
+def pan_pdf(request, pk):
+    return render(request, "pan.html")
