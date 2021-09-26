@@ -54,18 +54,24 @@
 
 <div class="row">
     <div class="gradient-border card-height card-1 mb-4 col-sm-4 offset-sm-4">
-        <p>Total Print Credits <br /><span>5</span> </p> 
+        <p>Total Available Points <br /><span>5</span> </p> 
     </div>
 </div>
 <div class="row">
     <div class="gradient-border card-height card-2 mb-4 col-sm-3 offset-sm-1">
-        <p>Total Voter Prints <br /><span>5</span> </p> 
+        <a href="{% url 'voters-list' %}">
+            <p>Total Voter Prints <br /><span>5</span> </p> 
+        </a>
     </div>
     <div class="gradient-border card-height card-3 mb-4 col-sm-3 offset-sm-1">
-        <p>Total Aadhaar Prints <br /><span>5</span> </p> 
+        <a href="">
+            <p>Total Aadhaar Prints <br /><span>5</span> </p> 
+        </a>
     </div>
     <div class="gradient-border card-height card-4 mb-4 col-sm-3 offset-sm-1">
-        <p>Total Pan Prints <br /><span>5</span> </p> 
+        <a href="{% url 'pan-list' %}">
+            <p>Total Pan Prints <br /><span>5</span> </p> 
+        </a>
     </div>
 </div>
 

@@ -12,13 +12,14 @@ from englisttohindi.englisttohindi import EngtoHindi
 
 import code128
 from datetime import date
-from main.models import Voter
+from main.models import Voter, Payment
+from .const import PAY_AMOUNTS
 
 @login_required
 def dashboard(request):
     if request.method == 'POST':
-        points = int(request.POST.get('points'))
-        amount = points*5*100
+        points = request.POST.get('points')
+        amount = PAY_AMOUNTS[points] * 100
 
         key = "rzp_test_KBBlsYrXB8PJkJ"
         secret = "R9DBF9jFtjS1LcA7zNphaaah"
@@ -27,16 +28,30 @@ def dashboard(request):
         order_currency = 'INR'
 
         payment = client.order.create(data={"amount": amount, "currency": order_currency})
+
+        new_payment = Payment(
+            razorpay_order_id=payment['id'],
+            amount=float(PAY_AMOUNTS[points]),
+            user=request.user
+        )
+        new_payment.save()
+        
         return render(request, 'main/dashboard.html', {'payment': payment, "key": key})
     return render(request, 'main/dashboard.html')
 
 @login_required
 @csrf_exempt
 def success(request):
-    response = request.POST
+    razorpay_order_id = request.POST.get("razorpay_order_id")
+    payment = Payment.objects.filter(razorpay_order_id=razorpay_order_id).first()
+    payment.paid = True
+    payment.save()
     context = {
-        "payment": response,
-        "user": request.user,
+        "oreder_id": payment.razorpay_order_id,
+        "user": payment.user,
+        "amount": payment.amount,
+        "status": 'success',
+        "timestamp": payment.created
     }
     return render(request, 'main/success.html', context)
 
