@@ -119,8 +119,7 @@ def upload_voter(request):
             return redirect('voters-list')
 
         path = settings.BASE_DIR / "media/barcodes/"
-        code128.image(epic).save(os.path.join(
-            path, f"{epic}.png"))
+        code128.image(epic).save(os.path.join(path, f"{name1+gname1}.png"))
         sp = block.split(" ")
         spblock = f'{sp[2]} {sp[1]} {sp[0]}'
         blck2 = f"{sp[2]} {sp[1]} {EngtoHindi(sp[0]).convert}"
@@ -140,7 +139,7 @@ def upload_voter(request):
             partname2=partname2,
             partno=partno,
             serialno=serialno,
-            barcode=f"barcodes/{epic}.png",
+            barcode=f"barcodes/{name1+gname1}.png",
             guardian_title=guardian_title.split('/')[1].strip(),
             user=request.user,
         )
