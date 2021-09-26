@@ -12,7 +12,7 @@ from englisttohindi.englisttohindi import EngtoHindi
 
 import code128
 from datetime import date
-from main.models import Voter, Payment
+from main.models import Voter, Payment, PANCard
 from .const import PAY_AMOUNTS
 
 @login_required
@@ -120,7 +120,8 @@ def upload_voter(request):
             partno=partno,
             serialno=serialno,
             barcode=f"barcodes/{epic}.png",
-            guardian_title=guardian_title.split('/')[1].strip()
+            guardian_title=guardian_title.split('/')[1].strip(),
+            user=request.user,
         )
         voter_data.save()
         messages.success(
@@ -187,12 +188,33 @@ def generate_pdf(request, id):
 
 @login_required
 def pan_list(request):
-    return render(request, "main/pan-list.html")
+    pans = PANCard.objects.all()
+    return render(request, "main/pan-list.html", {'pans': pans})
 
 @login_required
 def new_pan(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        fname = request.POST.get('fname')
+        birth = request.POST.get('birth')
+        pan = request.POST.get('pan')
+        photo = request.FILES.get('photo')
+        sign = request.FILES.get('sign')
+        new_pan = PANCard(
+            pan=pan,
+            name=name,
+            fname=fname,
+            birth=birth,
+            photo=photo,
+            sign=sign,
+            user=request.user
+        )
+        new_pan.save()
+        messages.success(request, "PAN card created successfully.")
+        return redirect('pan-list')
     return render(request, "main/new-pan.html")
 
 @login_required
 def pan_pdf(request, pk):
-    return render(request, "pan.html")
+    pan = get_object_or_404(PANCard, pk=pk)
+    return render(request, "pan.html", {'pan': pan})

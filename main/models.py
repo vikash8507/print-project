@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Voter(models.Model):
-    epic = models.CharField(max_length=20, unique=True)
+    epic = models.CharField(max_length=20)
     name1 = models.CharField(max_length=100)
     name2 = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -24,6 +24,7 @@ class Voter(models.Model):
     guardian_title = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='photos/', default="voter.png")
     barcode = models.ImageField(upload_to='barcodes/', null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.epic
@@ -39,3 +40,16 @@ class Payment(models.Model):
 
     def __str__(self):
         return str(self.user.username) + "->" + str(self.razorpay_order_id)
+
+
+class PANCard(models.Model):
+    pan = models.CharField(max_length=15)
+    name = models.CharField(max_length=255)
+    fname = models.CharField(max_length=255)
+    birth = models.DateField()
+    photo = models.ImageField(upload_to="pan/photos/")
+    sign = models.ImageField(upload_to="pan/signs/")
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.name + self.pan

@@ -8,12 +8,12 @@
 <div class="pan" id="content">
     <div class="pan-front">
         <img src="{% static 'images/p1.jpg' %}" alt="">
-        <p class="pan">EKPIK9731C</p>
-        <p class="name">VIKASH KUMAR</p>
-        <p class="fname">GAIRUN SINGH</p>
-        <p class="birth">04/05/1998</p>
-        <img src="{% static 'images/vikash.jpg' %}" alt="" class="image">
-        <img src="{% static 'images/sign.png' %}" alt="" class="sign">
+        <p class="pan">{{pan.pan}}</p>
+        <p class="name">{{pan.name}}</p>
+        <p class="fname">{{pan.fname}}</p>
+        <p class="birth">{{pan.birth|date:'m/d/Y'}}</p>
+        <img src="{{pan.photo.url}}" alt="" class="image">
+        <img src="{{pan.sign.url}}" alt="" class="sign">
         <div class="qrcode" style="background-color: white;"></div>
     </div>
     <div class="pan-back">

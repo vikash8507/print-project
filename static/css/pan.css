@@ -1,6 +1,6 @@
 .pan {
     display: flex;
-    height: 208px;
+    height: 211px;
     width: 665px;
     margin: auto;
 }
@@ -16,6 +16,11 @@
 
 .pan-front {
     margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+.pan-front {
+    margin-bottom: 3px;
 }
 
 .pan-front img, .pan-back img {
