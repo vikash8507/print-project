@@ -13,10 +13,18 @@ from englisttohindi.englisttohindi import EngtoHindi
 import code128
 from datetime import date
 from main.models import Voter, Payment, PANCard
-from .const import PAY_AMOUNTS
+from .const import PAY_AMOUNTS, POINTS_AMOUNTS
+
+def protect_access(request):
+    return request.user.points <= 0
 
 @login_required
 def dashboard(request):
+    context = {
+        "points": request.user.points,
+        "voters": Voter.objects.filter(user=request.user).count(),
+        "pans": PANCard.objects.filter(user=request.user).count()
+    }
     if request.method == 'POST':
         points = request.POST.get('points')
         amount = PAY_AMOUNTS[points] * 100
@@ -35,17 +43,27 @@ def dashboard(request):
             user=request.user
         )
         new_payment.save()
-        
-        return render(request, 'main/dashboard.html', {'payment': payment, "key": key})
-    return render(request, 'main/dashboard.html')
+        context['payment'] = payment
+        context['key'] = key
+        return render(request, 'main/dashboard.html', context)
+    return render(request, 'main/dashboard.html', context)
 
 @login_required
 @csrf_exempt
 def success(request):
+    if request.method == 'GET':
+        messages.warning(request, 'You can not access.')
+        return redirect('dashboard')
     razorpay_order_id = request.POST.get("razorpay_order_id")
     payment = Payment.objects.filter(razorpay_order_id=razorpay_order_id).first()
+    if payment.paid:
+        messages.success(request, "Payment completed")
+        return redirect("dashboard")
     payment.paid = True
     payment.save()
+    user = payment.user
+    user.points = user.points + POINTS_AMOUNTS[str(int(payment.amount))]
+    user.save()
     context = {
         "oreder_id": payment.razorpay_order_id,
         "user": payment.user,
@@ -57,6 +75,10 @@ def success(request):
 
 @login_required
 def upload_voter(request):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
+
     if request.method == 'POST':
         data = request.FILES.get('voter', None)
         if not data:
@@ -103,7 +125,6 @@ def upload_voter(request):
         spblock = f'{sp[2]} {sp[1]} {sp[0]}'
         blck2 = f"{sp[2]} {sp[1]} {EngtoHindi(sp[0]).convert}"
         partname2 = EngtoHindi(partname).convert
-        print(partname2)
         voter_data = Voter(
             epic=epic,
             name1=name1,
@@ -124,6 +145,9 @@ def upload_voter(request):
             user=request.user,
         )
         voter_data.save()
+        user = request.user
+        user.points = user.points - 1
+        user.save()
         messages.success(
             request, "Voter card added successfully. Please update it before print.")
         return redirect("voters-list")
@@ -131,6 +155,9 @@ def upload_voter(request):
 
 @login_required
 def fill_voter(request, id):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     voter = get_object_or_404(Voter, id=id)
     if request.method == "POST":
         add1 = request.POST.get("add1", voter.address1)
@@ -163,6 +190,10 @@ def fill_voter(request, id):
 
 @login_required
 def delete_voter(request, id):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
+
     voter = get_object_or_404(Voter, id=id)
     voter.delete()
     messages.success(request, "Voter deleted successfully.")
@@ -170,11 +201,17 @@ def delete_voter(request, id):
 
 @login_required
 def voters_list(request):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     voters = Voter.objects.all()
     return render(request, 'main/voters.html', {'voters': voters})
 
 @login_required
 def generate_pdf(request, id):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     voter = get_object_or_404(Voter, id=id)
     if voter.address1 == '' or voter.address2 == '' or voter.birth == '' or voter.photo == '':
         messages.warning(request, "Please update Address, Birth and Image.")
@@ -188,11 +225,17 @@ def generate_pdf(request, id):
 
 @login_required
 def pan_list(request):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     pans = PANCard.objects.all()
     return render(request, "main/pan-list.html", {'pans': pans})
 
 @login_required
 def new_pan(request):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     if request.method == 'POST':
         name = request.POST.get('name')
         fname = request.POST.get('fname')
@@ -210,11 +253,17 @@ def new_pan(request):
             user=request.user
         )
         new_pan.save()
+        user = request.user
+        user.points = user.points - 1
+        user.save()
         messages.success(request, "PAN card created successfully.")
         return redirect('pan-list')
     return render(request, "main/new-pan.html")
 
 @login_required
 def pan_pdf(request, pk):
+    if protect_access(request):
+        messages.warning(request, "You have no points to take any print.")
+        return redirect("dashboard")
     pan = get_object_or_404(PANCard, pk=pk)
     return render(request, "pan.html", {'pan': pan})

@@ -54,13 +54,13 @@
 
 <div class="row">
     <div class="gradient-border card-height card-1 mb-4 col-sm-4 offset-sm-4">
-        <p>Total Available Points <br /><span>5</span> </p> 
+        <p>Total Available Points <br /><span>{{points}}</span> </p> 
     </div>
 </div>
 <div class="row">
     <div class="gradient-border card-height card-2 mb-4 col-sm-3 offset-sm-1">
         <a href="{% url 'voters-list' %}">
-            <p>Total Voter Prints <br /><span>5</span> </p> 
+            <p>Total Voter Prints <br /><span>{{voters}}</span> </p> 
         </a>
     </div>
     <div class="gradient-border card-height card-3 mb-4 col-sm-3 offset-sm-1">
@@ -70,7 +70,7 @@
     </div>
     <div class="gradient-border card-height card-4 mb-4 col-sm-3 offset-sm-1">
         <a href="{% url 'pan-list' %}">
-            <p>Total Pan Prints <br /><span>5</span> </p> 
+            <p>Total Pan Prints <br /><span>{{pans}}</span> </p> 
         </a>
     </div>
 </div>
