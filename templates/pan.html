@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load qr_code %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/pan.css' %}">
 {% endblock %}
 {% block body %}
+<h3 class="text-center alert">VIKASH KUMAR</h3>
+<div class="pan" id="content">
     <div class="pan-front">
-        <img src="{% static 'images/pan.webp' %}" alt="">
-        <div class="color-change1"></div>
-        <div class="color-change2"></div>
-        <div class="color-change3"></div>
-        <div class="color-change4"></div>
+        <img src="{% static 'images/p1.jpg' %}" alt="">
         <p class="pan">EKPIK9731C</p>
         <p class="name">VIKASH KUMAR</p>
         <p class="fname">GAIRUN SINGH</p>
@@ -18,7 +15,24 @@
         <img src="{% static 'images/vikash.jpg' %}" alt="" class="image">
         <img src="{% static 'images/sign.png' %}" alt="" class="sign">
         <div class="qrcode" style="background-color: white;"></div>
-        <img src="{% qr_url_from_text "EKPIK9731C / VIKASH KUMAR / GAIRUN SINGH / 04/05/1998" size=8 version=20 error_correction="Q" cache_enabled=False %}" alt="Hello World!" class="qrcode">        
     </div>
+    <div class="pan-back">
+        <img src="{% static 'images/p2.jpg' %}" alt="">
+    </div>
+</div>
+<center>
+    <button onclick="CreatePDFfromHTML();" class='btn btn-success mt-1'><i class="fa fa-download"></i> Save as PDF</button>
+    <a href="{% url 'pan-list' %}" class="btn btn-info mt-1"><i class="fa fa-hand-point-left"></i> PAN List</a>
+</center>
 
+
+<script>
+    function CreatePDFfromHTML() {
+        var printContents = document.getElementById('content').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
 {% endblock %}

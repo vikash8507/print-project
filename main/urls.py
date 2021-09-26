@@ -13,5 +13,5 @@ urlpatterns = [
 
     path("pan-list/", pan_list, name="pan-list"),
     path("new-pan/", new_pan, name="new-pan"),
-    # path("pan-pdf/<int:pk>", pan_pdf, name="pan-pdf"),
+    path("pan-pdf/<int:pk>", pan_pdf, name="pan-pdf"),
 ]
