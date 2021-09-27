@@ -23,7 +23,7 @@
     <title>Print Document</title>
     <style>
         body {
-            background-color: rgb(153, 187, 187);
+            background: linear-gradient(to right, rgba(230, 76, 5, 0.938), rgba(219, 215, 215, 0.6), rgb(11, 187, 11, 0.6)) center center;
         }
 
         .logo {
@@ -42,8 +42,12 @@
         <a href="{% url 'dashboard' %}" class="active"><i class="fa fa-fw fa-home"></i> Home</a>
         {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out-alt"></i> Logout</a>
+        {% if request.user.is_staff %}
+        <a href="/admin"><i class="fa fa-fw fa-sign-out-alt"></i> Admin</a>
+        {% endif %}
         {% else %}
-        <a href="{% url 'login' %}"><i class="fa fa-fw fa-sign-in-alt"></i> Logout</a>
+        <a href="{% url 'login' %}"><i class="fa fa-fw fa-sign-in-alt"></i> Login</a>
+        <a href="{% url 'register' %}"><i class="fa fa-fw fa-user-plus"></i> Register</a>
         {% endif %}
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
@@ -51,17 +55,20 @@
     </div>
 
     <!-- Sidebar -->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{% url 'dashboard' %}"><i class="fa fa-chart-line"></i> Dashboard</a>
-        <a href="#"><i class="fa fa-fw fa-file-pdf"></i> Aadhaar</a>
-        <a href="{% url 'voters-list' %}"><i class="fa fa-fw fa-file-pdf"></i> Voter</a>
-        <a href="{% url 'pan-list' %}"><i class="fa fa-fw fa-file-pdf"></i> PAN</a>
-        <a href="#"><i class="fa fa-fw fa-address-card"></i> Contact</a>
-    </div>
+{% if request.user.is_authenticated %}
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{% url 'dashboard' %}"><i class="fa fa-chart-line"></i> Dashboard</a>
+    <a href="#"><i class="fa fa-fw fa-file-pdf"></i> Aadhaar</a>
+    <a href="{% url 'voters-list' %}"><i class="fa fa-fw fa-file-pdf"></i> Voter</a>
+    <a href="{% url 'pan-list' %}"><i class="fa fa-fw fa-file-pdf"></i> PAN</a>
+    <a href="#"><i class="fa fa-fw fa-address-card"></i> Contact</a>
+</div>
 
     <!-- Use any element to open the sidenav -->
-    <button type="button" class="btn btn-outline-success mt-2 ml-2" onclick="openNav()">All Services</button>
+    <button type="button" class="btn btn-outline-success mt-2 ml-2" style="color: black" onclick="openNav()">All Services</button>
+{% endif %}
+
 
     <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="main">
