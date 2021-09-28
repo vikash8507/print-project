@@ -6,10 +6,10 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: rgb(169, 212, 230); /* Black*/
+    background: linear-gradient(to bottom, rgba(230, 76, 5, 0.938), rgba(219, 215, 215, 0.6), rgb(11, 187, 11, 0.6)); /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    transition: 1s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
@@ -24,7 +24,7 @@
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: rgba(230, 76, 5, 0.938);
+    color: #fff;
 }
 
 /* Position and style the close button (top right corner) */

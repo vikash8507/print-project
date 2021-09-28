@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% load static %}
-{% block style %}
-<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
-{% endblock %}
 {% block body %}
-    {% include "carousel.html" %}
     <div class="col-sm-6 offset-sm-3">
         <h3 class="alert text-center">Login</h3>
         <form action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" value='Login' class="btn btn-info btn-block" />
+            <input type="submit" value='Login' class="btn btn-primary btn-block" />
         </form>
     </div>
 {% endblock %}

@@ -1,9 +1,32 @@
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.logourl span {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
 .topnav {
     overflow: hidden;
     background-color: rgba(230, 76, 5, 0.938);
 }
 
 .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    line-height: 60px;
+}
+
+.topnav .logourl {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -15,9 +38,10 @@
 }
 
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: white;
     color: black;
 }
+
 
 /* .topnav a.active {
     background-color: #04AA6D;

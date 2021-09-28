@@ -18,6 +18,12 @@ from .const import PAY_AMOUNTS, POINTS_AMOUNTS
 def protect_access(request):
     return request.user.points <= 0
 
+def home(request):
+    return render(request, 'home.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 @login_required
 def dashboard(request):
     context = {
@@ -200,17 +206,11 @@ def delete_voter(request, id):
 
 @login_required
 def voters_list(request):
-    if protect_access(request):
-        messages.warning(request, "You have no points to take any print.")
-        return redirect("dashboard")
-    voters = Voter.objects.all()
+    voters = Voter.objects.filter(user=request.user)
     return render(request, 'main/voters.html', {'voters': voters})
 
 @login_required
 def generate_pdf(request, id):
-    if protect_access(request):
-        messages.warning(request, "You have no points to take any print.")
-        return redirect("dashboard")
     voter = get_object_or_404(Voter, id=id)
     if voter.address1 == '' or voter.address2 == '' or voter.birth == '' or voter.photo == '':
         messages.warning(request, "Please update Address, Birth and Image.")
@@ -224,10 +224,7 @@ def generate_pdf(request, id):
 
 @login_required
 def pan_list(request):
-    if protect_access(request):
-        messages.warning(request, "You have no points to take any print.")
-        return redirect("dashboard")
-    pans = PANCard.objects.all()
+    pans = PANCard.objects.filter(user=request.user)
     return render(request, "main/pan-list.html", {'pans': pans})
 
 @login_required
@@ -261,8 +258,5 @@ def new_pan(request):
 
 @login_required
 def pan_pdf(request, pk):
-    if protect_access(request):
-        messages.warning(request, "You have no points to take any print.")
-        return redirect("dashboard")
     pan = get_object_or_404(PANCard, pk=pk)
     return render(request, "pan.html", {'pan': pan})
