@@ -41,6 +41,7 @@
         <a href="/admin"><i class="fa fa-fw fa-user-cog"></i> Admin</a>
         {% endif %}
         <a href="{% url 'logout' %}"><i class="fa fa-fw fa-sign-out-alt"></i> Logout</a>
+        <a href="{% url 'change_password' %}"><i class="fa fa-fw fa-key"></i> ChangePassword</a>
         {% else %}
         <a href="{% url 'login' %}"><i class="fa fa-fw fa-sign-in-alt"></i> Login</a>
         <a href="{% url 'register' %}"><i class="fa fa-fw fa-user-plus"></i> Register</a>

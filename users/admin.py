@@ -5,9 +5,9 @@ from users.models import User
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ('username', 'is_staff', 'is_active', 'points', )
+    list_display = ('username', 'name', 'is_active', 'points', 'phone', )
     fieldsets = (
-        (None, {'fields': ("username", 'email', 'password', "first_name", 'last_name', "points")}),
+        (None, {'fields': ("username", 'email', 'password', "name", 'phone', "points", "shop_name", "shop_address")}),
     )
 
 

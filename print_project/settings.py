@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-nol*dkbr%1u-_nq#1=%p2$wx9%(e%x*q5wc9=v5$nxk%!!$(gb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://voterprint.herokuapp.com/", "127.0.0.1:8000/"]
-
+# ALLOWED_HOSTS = ["https://voterprint.herokuapp.com/", "127.0.0.1:8000/", "localhost:8000/"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -152,3 +152,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com’'
+EMAIL_PORT=587
+EMAIL_HOST_USER='vikash.kumar@thinkitive.com'
+EMAIL_HOST_PASSWORD='Vikash@1998'
+EMAIL_USE_TLS=True
