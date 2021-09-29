@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+{% endblock %}
 {% block body %}
         <div class="container">
             {% include 'carousel.html' %}
