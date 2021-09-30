@@ -24,6 +24,7 @@ from users.views import register_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path("register/", register_view, name="register"),
     path('change-password/', auth_views.PasswordChangeView.as_view(template_name='registration/change-password.html'), name='change_password'),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='registration/password-reset/password_reset_form.html'), name='password_reset'),
