@@ -1,1 +1,2 @@
 print_project/.env
+db.sqlite3
