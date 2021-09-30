@@ -34,9 +34,8 @@ def dashboard(request):
     if request.method == 'POST':
         points = request.POST.get('points')
         amount = PAY_AMOUNTS[points] * 100
-
-        key = "rzp_test_KBBlsYrXB8PJkJ"
-        secret = "R9DBF9jFtjS1LcA7zNphaaah"
+        key = settings.RAZORPAY_KEY_ID
+        secret = settings.RAZORPAY_KEY_SECRET
 
         client = razorpay.Client(auth=(key, secret))
         order_currency = 'INR'

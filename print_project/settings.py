@@ -17,20 +17,22 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# env = environ.Env()
-# environ.Env.read_env()
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nol*dkbr%1u-_nq#1=%p2$wx9%(e%x*q5wc9=v5$nxk%!!$(gb'
+# SECRET_KEY = 'django-insecure-nol*dkbr%1u-_nq#1=%p2$wx9%(e%x*q5wc9=v5$nxk%!!$(gb'
+SECRET_KEY = env('SECRET_KEY')
+RAZORPAY_KEY_ID = env('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = env('RAZORPAY_KEY_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["https://voterprint.herokuapp.com/", "127.0.0.1:8000/", "localhost:8000/"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://voterprint.herokuapp.com/", "127.0.0.1:8000/", "localhost:8000/"]
 
 # Application definition
 
@@ -157,7 +159,7 @@ django_heroku.settings(locals())
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'vikash.kumar@thinkitive.com'
-EMAIL_HOST_PASSWORD = 'Vikash@1998'
+EMAIL_HOST_USER = env('EMAIL_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 ACCOUNT_EMAIL_VERIFICATION = 'none'
